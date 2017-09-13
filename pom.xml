@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.whq</groupId>
+  <artifactId>shadow</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>shadow</name>
+   <properties>
+    <!-- spring版本号 -->
+    <spring.version>3.2.2.RELEASE</spring.version>
+    <!-- log4j日志文件管理包版本 -->
+    <slf4j.version>1.7.7</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+  </properties>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.poi</groupId>
+  		<artifactId>poi</artifactId>
+  		<version>3.9</version>
+  	</dependency>
+  	<!-- spring核心包 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+     <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+   	 <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+	<pluginManagement>
+		<plugins>
+		        <plugin>  
+		            <groupId>org.apache.maven.plugins</groupId>  
+		            <artifactId>maven-jar-plugin</artifactId>  
+		            <version>2.4</version>  
+		            <!-- The configuration of the plugin -->  
+		            <configuration>  
+		                <!-- Configuration of the archiver -->  
+		                <archive>  
+		  
+		                    <!--     生成的jar中，不要包含pom.xml和pom.properties这两个文件   -->  
+		                    <addMavenDescriptor>false</addMavenDescriptor>  
+		                    <!-- Manifest specific configuration -->  
+		                    <manifest>  
+		                        <!-- 是否要把第三方jar放到manifest的classpath中 -->  
+		                        <addClasspath>true</addClasspath>  
+		                        <!--   生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/  -->  
+		                        <classpathPrefix>lib/</classpathPrefix>  
+		                        <!-- 应用的main class  -->  
+		                        <mainClass>com.whq.main.Shadow</mainClass>  
+		                    </manifest>  
+		                </archive>  
+		                <!-- 过滤掉不希望包含在jar中的文件  -->  
+		                <excludes>  
+		                    <exclude>${project.basedir}/xml/*</exclude>  
+		                </excludes>  
+		            </configuration>  
+        </plugin>  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}
+                            </outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>    
+	</pluginManagement>
+  </build>
+</project>

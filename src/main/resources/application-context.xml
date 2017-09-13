@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="attendanceService" class="com.whq.service.impl.AttendanceServiceImpl">
+		<property name="excelParserService" ref="excelParserService"></property>
+		<property name="fileResultService" ref="fileResultService"></property>
+		<property name="resultHandleCenterService" ref="resultHandleCenterService"></property>
+		<property name="ruleCenterService" ref="ruleCenterService"></property>
+	</bean>
+	
+	<bean id="excelParserService" class="com.whq.service.impl.ExcelParserServiceImpl"></bean>
+	<bean id="fileResultService" class="com.whq.service.impl.ExcelResultServiceImpl"></bean>
+	<bean id="resultHandleCenterService" class="com.whq.service.impl.ResultHandleCenterServiceImpl">
+		<property name="fileResultService" ref="fileResultService"></property>
+	</bean>
+	<bean id="ruleCenterService" class="com.whq.service.impl.RuleCenterServiceImpl"></bean>
+
+</beans>
