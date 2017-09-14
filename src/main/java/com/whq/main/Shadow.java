@@ -15,6 +15,7 @@ import com.whq.service.AttendanceService;
 public class Shadow {
 	public static void main(String[] args) {
         Scanner s = new Scanner(System.in); 
+        System.out.println("======欢迎使用影子考勤系统1.0=====");
         System.out.println("请将文件拖到此窗口，按回车继续："); 
         String line = s.nextLine(); 
 		XmlBeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("application-context.xml"));
